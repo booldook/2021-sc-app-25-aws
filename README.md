@@ -85,3 +85,47 @@ node ./bin/www
 # 확인
 ```
 ![그림](./img/11.jpg)
+
+## nginx 설치
+```bash
+# nginx 설치
+sudo apt install nginx
+
+# nginx 시작
+sudo service nginx start
+
+# nginx 멈춤
+sudo service nginx stop
+
+# nginx 재시작
+sudo service nginx restart
+```
+
+## nginx 80접근 -> 3000이동
+```bash
+# /etc/nginx/sites-avaiable 에 book 설정파일 만들기
+sudo vi /etc/nginx/sites-available/book
+
+# vi가 실행되면 아래사항 입력하고 **esc** **:wq**
+server {
+  listen 80;
+  server_name xxx.xxx.xxx.xxx;
+  location / {
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-NginX-Proxy true;
+    proxy_pass http://127.0.0.1:3000/;
+    proxy_redirect off;
+  }
+}
+
+# sites-available의 설정을 sites-enabled로 심볼릭 링크(바로가기)로 링크하기
+sudo ln -s /etc/nginx/sites-available/book /etc/nginx/sites-enabled/book
+
+# nginx 문법 오류 테스트
+sudo nginx -t
+
+# 이상 없다면 nginx 재구동
+sudo service nginx restart
+```
