@@ -11,6 +11,8 @@
 
 ![설정1](./img/04.jpg)
 
+![설정1](./img/13.jpg)
+
 5. IP 할당
 
 ![설정1](./img/05.jpg)
@@ -173,7 +175,7 @@ flush privileges;
 create database book;
 
 -- book에 접근할 book사용자 생성
-GRANT privileges ON book.* TO 'book'@'%' identified by '000000';
+GRANT all privileges ON book.* TO 'book'@'%' identified by '000000';
 ```
 
 
