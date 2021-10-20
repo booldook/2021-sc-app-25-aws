@@ -129,3 +129,43 @@ sudo nginx -t
 # 이상 없다면 nginx 재구동
 sudo service nginx restart
 ```
+
+
+## MySQL(MariaDB) 설치
+```bash
+sudo apt install mariadb-server
+```
+
+## MySQL(MariaDB) 설정
+```bash
+# mysql native connection 접근(비밀번호 x)
+sudo mysql
+```
+```sql
+-- mysql database change
+use mysql;
+
+-- Local사용자(서버에서 직접(Shell) 접근)의 접근 방식을 password입력으로 바꿈
+UPDATE user SET plugin='mysql_native_password' WHERE user='root';
+
+-- root사용자의 비밀번호 변경
+UPDATE user SET authentication_string=PASSWORD('비밀번호') WHERE user='root';
+
+-- 권한 즉시 적용
+flush privileges;
+
+-- 종료
+quit
+
+-- 재접속
+sudo mysql -u root -p
+-- 패스워드는 나타나지 않지만 입력되고 있음(당황하지말기)
+
+-- 외부에서 접근할 사용자 만들기
+GRANT all privileges ON *.* TO 'user'@'%' identified by '패스워드';
+
+flush privileges;
+```
+
+
+## MySQL(MariaDB) 외부접속허용
