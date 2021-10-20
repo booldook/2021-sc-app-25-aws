@@ -25,7 +25,63 @@
 
 ![설정1](./img/10.jpg)
 
-## 서버 설정
+## 서버 접속
 ```bash
-
+# bash창을 열고
+cd key
+ssh -i default.pem ubuntu@xxx.xxx.xxx.xxx
+# 서버 접속
 ```
+
+## 서버 설정 - node, npm
+```bash
+# apt registry update
+sudo apt update
+
+# nvm 설치
+sudo apt-get install build-essential libssl-dev
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.0/install.sh | bash
+nvm install 14
+nvm use 14
+
+# node 설치 확인
+node -v
+
+# npm 설치
+sudo apt install npm
+
+# npm 버전 확인
+npm -v
+
+# npm registry update
+npm config set registry http://registry.npmjs.org
+```
+
+## Express project 만들어 보기
+```bash
+# express-generator 설치
+sudo npm i -g express-generator
+
+# nodemon 설치
+sudo npm i -g nodemon
+
+# pm2 설치
+sudo npm i -g pm2
+
+
+# webroot 폴더 만들기
+cd ~
+mkdir webroot
+
+cd webroot
+
+# express sample 프로젝트 만들기
+express --view=ejs sample
+
+# express sample 실행하기
+cd sample
+node ./bin/www
+
+# 확인
+```
+![그림](./img/11.jpg)
