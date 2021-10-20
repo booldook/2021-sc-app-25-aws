@@ -190,3 +190,9 @@ sudo vi /etc/mysql/mariadb.conf.d/50-server.cnf
 # MySQL 재시작
 sudo service mysql restart
 ```
+
+## 서버 시간대 변경
+```bash
+sudo timedatectl set-timezone Asia/Seoul
+sudo service mysql restart
+```
